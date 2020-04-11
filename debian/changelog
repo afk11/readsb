@@ -1,3 +1,29 @@
+readsb (3.8.3~dev) UNRELEASED; urgency=medium
+
+  * In development
+  * Improvement of SBS decoding (by wiedehopf)
+  * Add marker types for ground vehicles and towers.
+  * Contribution wiedehopf:
+    * Connection timed out: remove misleading explanation
+    * keepalive: set and check for error in net_io.c instead of blindly doing it in anet.c
+    * Add custom keepalive settings that will time out a broken connection after 30 seconds.
+
+ -- Michael Wolf <michael@mictronics.de>  Sun, 01 Mar 2020 10:07:51 +0100
+
+readsb (3.8.2) stable; urgency=medium
+
+  * Webapp: History loading and trace collection moved to background worker.
+  * Fix hidding SkyVector layers when no API key is present.
+  * Fix latest stats, was always zero, is now momentary statistic.
+  * Fix bug in overlay layer generation when language is not English.
+  * Add DC-10 aircraft marker.
+  * Disable source maps for third-party scripts.
+  * Fix sporatic buffer overflow in JSON stats generation.
+  * Zero initalize new network clients.
+  * Prevent segmentation fault on invalid protocol name.
+
+ -- Michael Wolf <michael@mictronics.de>  Sun, 01 Mar 2020 10:02:17 +0100
+
 readsb (3.8.1) stable; urgency=medium
 
   * Load default web application settings from JSON file.
