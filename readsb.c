@@ -404,7 +404,7 @@ static void backgroundTasks(void) {
         //writeJsonToFile("vrs.json", generateVRS(0, 1));
     }
 
-    if (Modes.json_dir && now >= next_history) {
+    if (0 && Modes.json_dir && now >= next_history) {
         char filebuf[PATH_MAX];
         snprintf(filebuf, PATH_MAX, "history_%d.json", Modes.json_aircraft_history_next);
         writeJsonToFile(filebuf, generateAircraftJson());
@@ -827,7 +827,7 @@ int main(int argc, char **argv) {
 
             background_cpu_millis = (int64_t) Modes.stats_current.background_cpu.tv_sec * 1000UL +
                 Modes.stats_current.background_cpu.tv_nsec / 1000000UL;
-            sleep_millis = sleep_millis - (background_cpu_millis - prev_cpu_millis);
+            sleep_millis = sleep_millis - (background_cpu_millis + prev_cpu_millis) / 2;
             sleep_millis = (sleep_millis <= 20) ? 20 : sleep_millis;
 
             //fprintf(stderr, "%ld\n", sleep_millis);
