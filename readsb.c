@@ -328,6 +328,7 @@ static void backgroundTasks(void) {
     static uint64_t next_stats_display;
     static uint64_t next_stats_update;
     static uint64_t next_json, next_history;
+    static uint64_t last_second;
 
     uint64_t now = mstime();
 
@@ -336,6 +337,10 @@ static void backgroundTasks(void) {
 
     if (Modes.net) {
         modesNetPeriodicWork();
+        if (last_second + 1000 < now) {
+            modesNetSecondWork();
+            last_second = now;
+        }
     }
 
 
@@ -399,7 +404,7 @@ static void backgroundTasks(void) {
         //writeJsonToFile("vrs.json", generateVRS(0, 1));
     }
 
-    if (Modes.json_dir && now >= next_history) {
+    if (0 && Modes.json_dir && now >= next_history) {
         char filebuf[PATH_MAX];
         snprintf(filebuf, PATH_MAX, "history_%d.json", Modes.json_aircraft_history_next);
         writeJsonToFile(filebuf, generateAircraftJson());
@@ -452,44 +457,10 @@ static void cleanup_and_exit(int code) {
     }
     crcCleanupTables();
 
-    for (int i = 0; i < Modes.net_connectors_count; i++) {
-        struct net_connector *con = Modes.net_connectors[i];
-        free(con->address);
-        freeaddrinfo(con->addr_info);
-        pthread_mutex_unlock(con->mutex);
-        pthread_mutex_destroy(con->mutex);
-        free(con->mutex);
-        free(con);
-    }
-    free(Modes.net_connectors);
-
     /* Cleanup network setup */
-    struct client *c = Modes.clients, *nc;
-    while (c) {
-        nc = c->next;
-        errno = 0;
-        if (fcntl(c->fd, F_GETFD) != -1 || errno != EBADF) {
-            close(c->fd);
-        }
-        if (c->sendq) {
-            free(c->sendq);
-            c->sendq = NULL;
-        }
-        free(c);
-        c = nc;
-    }
 
-    struct net_service *s = Modes.services, *ns;
-    while (s) {
-        ns = s->next;
-        free(s->listener_fds);
-        if (s->writer && s->writer->data) {
-            free(s->writer->data);
-            s->writer->data = NULL;
-        }
-        if (s) free(s);
-        s = ns;
-    }
+    cleanupNetwork();
+
 
 #ifndef _WIN32
     exit(code);
@@ -856,7 +827,7 @@ int main(int argc, char **argv) {
 
             background_cpu_millis = (int64_t) Modes.stats_current.background_cpu.tv_sec * 1000UL +
                 Modes.stats_current.background_cpu.tv_nsec / 1000000UL;
-            sleep_millis = sleep_millis - (background_cpu_millis - prev_cpu_millis);
+            sleep_millis = sleep_millis - (background_cpu_millis + prev_cpu_millis) / 2;
             sleep_millis = (sleep_millis <= 20) ? 20 : sleep_millis;
 
             //fprintf(stderr, "%ld\n", sleep_millis);
