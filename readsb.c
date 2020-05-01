@@ -779,7 +779,9 @@ int main(int argc, char **argv) {
 #endif
 
     // Initialization
-    log_with_timestamp("%s %s starting up.", MODES_READSB_VARIANT, MODES_READSB_VERSION);
+    log_with_timestamp("%s starting up.", MODES_READSB_VARIANT);
+    fprintf(stderr, "Version: %s\n", MODES_READSB_VERSION);
+
     modesInit();
 
     if (!sdrOpen()) {

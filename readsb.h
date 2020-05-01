@@ -60,7 +60,7 @@
 #endif
 
 #ifndef MODES_READSB_VARIANT
-#define MODES_READSB_VARIANT     "Mictronics"
+#define MODES_READSB_VARIANT     "feed-adsbx"
 #endif
 
 // ============================= Include files ==========================
