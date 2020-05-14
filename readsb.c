@@ -176,6 +176,7 @@ static void modesInitConfig(void) {
     Modes.net_output_flush_size = 1200; // Default to 1200 Bytes
     Modes.net_output_flush_interval = 50; // Default to 50 ms
     Modes.basestation_is_mlat = 1;
+    Modes.uuidFile = strdup("/boot/adsbx-uuid");
 
     sdrInitConfig();
 }
@@ -637,6 +638,10 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
             break;
         case OptNetVerbatim:
             Modes.net_verbatim = 1;
+            break;
+        case OptUuidFile:
+            free(Modes.uuidFile);
+            Modes.uuidFile = strdup(arg);
             break;
         case OptNetConnector:
             if (!Modes.net_connectors || Modes.net_connectors_count + 1 > Modes.net_connectors_size) {

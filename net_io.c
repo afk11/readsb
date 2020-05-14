@@ -289,13 +289,17 @@ struct client *checkServiceConnected(struct net_connector *con) {
             con->service->descr, con->address, con->resolved_addr, con->port);
 
     // sending UUID if hostname matches adsbexchange
-    if (c->sendq && strstr(con->address, "adsbexchange")) {
+    if (c->sendq && strstr(con->address, "feed.adsbexchange.com")) {
+        char buf[130];
         unsigned char *sendq = c->sendq;
         sendq[0] = 0x1A;
         sendq[1] = 0xE4;
-        int fd = open("/boot/adsbx-uuid", O_RDONLY);
+        int fd = open(Modes.uuidFile, O_RDONLY);
         int res = (fd != -1) ? read(fd, c->sendq + 2, 128) : -1;
         if (res >= 16) {
+            strncpy(buf, c->sendq + 2, res);
+            buf[129] = '\0';
+            fprintf(stderr, "uuid: %s\n", buf);
             c->sendq_len = res + 2;
             flushClient(c, mstime());
         }
@@ -303,6 +307,7 @@ struct client *checkServiceConnected(struct net_connector *con) {
             close(fd);
         }
     }
+
 
     return c;
 }
