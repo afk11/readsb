@@ -54,6 +54,7 @@
 #include "readsb.h"
 #include <inttypes.h>
 #include "geomag.h"
+#include "sdr_rtlsdr.h"
 
 uint32_t modeAC_count[4096];
 uint32_t modeAC_lastcount[4096];
@@ -1705,6 +1706,13 @@ void trackPeriodicUpdate() {
 
     struct timespec start_time;
     start_cpu_timing(&start_time);
+
+#if defined(READSB)
+#ifdef ENABLE_RTLSDR
+    if (Modes.sdr_type == SDR_RTLSDR)
+        rtlsdrSetGain(Modes.gain_closest - 4 * (part % 2));
+#endif
+#endif
 
     trackRemoveStaleAircraft(&freeList);
     if (Modes.mode_ac)

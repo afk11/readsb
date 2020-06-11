@@ -30,5 +30,6 @@ bool rtlsdrOpen ();
 void rtlsdrRun ();
 void rtlsdrClose ();
 bool rtlsdrHandleOption (int argc, char *argv);
+void rtlsdrSetGain(int index);
 
 #endif

@@ -379,6 +379,8 @@ struct
   iq_convert_fn converter_function;
   char * dev_name;
   int gain;
+  int *gains;
+  int gain_closest;
   int enable_agc;
   sdr_type_t sdr_type; // where are we getting data from?
   int freq;
