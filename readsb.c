@@ -780,6 +780,17 @@ int main(int argc, char **argv) {
         fprintf(stderr, "\n");
         cleanup_and_exit(1);
     }
+    if (argc >= 2 && (
+                !strcmp(argv[1], "--help")
+                || !strcmp(argv[1], "--usage")
+                || !strcmp(argv[1], "--version")
+                || !strcmp(argv[1], "-V")
+                || !strcmp(argv[1], "-?")
+                )
+       ) {
+        exit(0);
+    }
+
 
 #ifdef _WIN32
     // Try to comply with the Copyright license conditions for binary distribution
