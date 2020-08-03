@@ -2169,7 +2169,8 @@ void useModesMessage(struct modesMessage *mm) {
         } else if (a->messages > 1) {
             // Suppress the first message. When we receive a second message,
             // emit the first two messages.
-            if (a->messages == 2) {
+            // don't forward the first message in net-only mode (this is the adsbx feed client, no delayed data wanted)
+            if (a->messages == 2 && !Modes.net_only) {
                 modesQueueOutput(&a->first_message, a);
             }
             modesQueueOutput(mm, a);
