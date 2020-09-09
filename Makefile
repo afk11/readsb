@@ -59,7 +59,7 @@ all: readsb viewadsb
 %.o: %.c *.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-readsb: readsb.o anet.o interactive.o mode_ac.o mode_s.o comm_b.o net_io.o crc.o demod_2400.o stats.o cpr.o icao_filter.o track.o util.o convert.o sdr_ifile.o sdr_beast.o sdr.o ais_charset.o $(SDR_OBJ) $(COMPAT)
+readsb: readsb.o readsb-main.o anet.o interactive.o mode_ac.o mode_s.o comm_b.o net_io.o crc.o demod_2400.o stats.o cpr.o icao_filter.o track.o util.o convert.o sdr_ifile.o sdr_beast.o sdr.o ais_charset.o $(SDR_OBJ) $(COMPAT)
 	$(CC) -g -o $@ $^ $(LDFLAGS) $(LIBS) $(LIBS_SDR) -lncurses
 
 viewadsb: viewadsb.o anet.o interactive.o mode_ac.o mode_s.o comm_b.o net_io.o crc.o stats.o cpr.o icao_filter.o track.o util.o ais_charset.o $(COMPAT)
