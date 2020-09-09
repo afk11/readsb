@@ -1,4 +1,4 @@
-#define READSB_MAIN
+#define READSB
 
 #include <pthread.h>
 #include <signal.h>
