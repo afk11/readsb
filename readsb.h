@@ -707,27 +707,16 @@ enum {
 #include "comm_b.h"
 
 const char *emergency_to_string(emergency_t emergency);
-
- const char *df_to_string(unsigned df);
-
- const char *altitude_unit_to_string(altitude_unit_t unit);
-
- const char *airground_to_string(airground_t airground);
-
- const char *addrtype_to_string(addrtype_t type);
-
- const char *cpr_type_to_string(cpr_type_t type);
-
- const char *heading_type_to_string(heading_type_t type);
-
- const char *commb_format_to_string(commb_format_t format);
-
- const char *nav_modes_to_string(nav_modes_t flags);
-
- const char *sil_type_to_string(sil_type_t type);
-
-
- void print_hex_bytes(unsigned char *data, size_t len);
+const char *df_to_string(unsigned df);
+const char *altitude_unit_to_string(altitude_unit_t unit);
+const char *airground_to_string(airground_t airground);
+const char *addrtype_to_string(addrtype_t type);
+const char *cpr_type_to_string(cpr_type_t type);
+const char *heading_type_to_string(heading_type_t type);
+const char *commb_format_to_string(commb_format_t format);
+const char *nav_modes_to_string(nav_modes_t flags);
+const char *sil_type_to_string(sil_type_t type);
+void print_hex_bytes(unsigned char *data, size_t len);
 
 // ======================== function declarations =========================
 
