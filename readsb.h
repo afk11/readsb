@@ -81,7 +81,6 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <time.h>
-#include <limits.h>
 #else
 #include "winstubs.h" //Put everything Windows specific in here
 #endif
@@ -125,6 +124,11 @@
 #define MODES_USER_LATLON_VALID (1<<0)
 
 #define INVALID_ALTITUDE (-9999)
+
+/* A timestamp that indicates the data is synthetic, created from a
+ * multilateration result
+ */
+#define MAGIC_MLAT_TIMESTAMP 0xFF004D4C4154ULL
 
 /* Where did a bit of data arrive from? In order of increasing priority */
 typedef enum
@@ -710,6 +714,29 @@ enum {
 #include "track.h"
 #include "mode_s.h"
 #include "comm_b.h"
+
+const char *emergency_to_string(emergency_t emergency);
+
+ const char *df_to_string(unsigned df);
+
+ const char *altitude_unit_to_string(altitude_unit_t unit);
+
+ const char *airground_to_string(airground_t airground);
+
+ const char *addrtype_to_string(addrtype_t type);
+
+ const char *cpr_type_to_string(cpr_type_t type);
+
+ const char *heading_type_to_string(heading_type_t type);
+
+ const char *commb_format_to_string(commb_format_t format);
+
+ const char *nav_modes_to_string(nav_modes_t flags);
+
+ const char *sil_type_to_string(sil_type_t type);
+
+
+ void print_hex_bytes(unsigned char *data, size_t len);
 
 // ======================== function declarations =========================
 
