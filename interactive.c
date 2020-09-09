@@ -54,6 +54,8 @@
 #include <curses.h>
 #include <math.h>
 #include "readsb.h"
+#include "mode_ac.h"
+
 
 //
 //========================= Interactive mode ===============================
