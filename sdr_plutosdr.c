@@ -19,6 +19,7 @@
 
 #include <iio.h>
 #include <ad9361.h>
+#include <fcntl.h>
 #include "readsb.h"
 #include "sdr_plutosdr.h"
 

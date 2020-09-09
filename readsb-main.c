@@ -1,8 +1,12 @@
 #define READSB_MAIN
 
+#include <pthread.h>
+#include <signal.h>
+#include <stdarg.h>
+#include <string.h>
+#include <unistd.h>
 #include "readsb.h"
 #include "help.h"
-#include <stdarg.h>
 
 //
 // ============================= Program options help ==========================

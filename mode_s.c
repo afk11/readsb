@@ -52,11 +52,13 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-#include "readsb.h"
-#include "ais_charset.h"
-
+#include <math.h>
 /* for PRIX64 */
 #include <inttypes.h>
+#include "readsb.h"
+#include "ais_charset.h"
+#include <string.h>
+
 
 //
 // ===================== Mode S detection and decoding  ===================

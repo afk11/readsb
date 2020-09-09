@@ -18,6 +18,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <termios.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include "readsb.h"
 #include "sdr_beast.h"
 

@@ -52,6 +52,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "readsb.h"
+#include <math.h>
+#include <string.h>
 #include <inttypes.h>
 
 /* #define DEBUG_CPR_CHECKS */

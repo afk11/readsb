@@ -56,6 +56,7 @@
 /* for PRIX64 */
 #include <inttypes.h>
 
+#include <math.h>
 #include <assert.h>
 #include <stdarg.h>
 #include <sys/socket.h>
@@ -64,7 +65,12 @@
 #include <netdb.h>
 #include <poll.h>
 #include <pthread.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include <limits.h>
+#include <ctype.h>
+#include <signal.h>
 
 //
 // ============================= Networking =============================

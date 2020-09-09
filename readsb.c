@@ -52,6 +52,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define READSB
+#include <string.h>
+#include <stdio.h>
 #include "readsb.h"
 
 static const char *df_names[33] = {
